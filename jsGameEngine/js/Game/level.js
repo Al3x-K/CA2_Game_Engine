@@ -1,9 +1,32 @@
-import Input from "../js/Engine/input.js";
+
 
 const canvas = document.querySelector('canvas'); 
 const ctx = canvas.getContext('2d');  
 
 const gravity = 0.5;
+class Sprite
+{
+    constructor({position, imageSrc})
+    {
+        this.position = position;
+        this.image = new Image();
+        this.image.src = imageSrc;
+    }
+
+    draw(ctx)
+    {
+        if(!this.image)
+        {
+            return;
+        }
+        ctx.drawImage(this.image, this.position.x, this.position.y);
+    }
+
+    update()
+    {
+        this.draw(ctx);
+    }
+}
 
 class Player
 {  
@@ -42,11 +65,13 @@ const player = new Player();
 let y = 10;
 const keys = {};
 
+const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg2.jpg'});
 function gameLoop()
 {
     window.requestAnimationFrame(gameLoop);
     ctx.fillStyle = 'white';
-    ctx.fillRect(0,0,canvas.width,canvas.height);    
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    background.update();    
     player.update();
 }
 
