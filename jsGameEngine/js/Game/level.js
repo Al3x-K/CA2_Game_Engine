@@ -6,11 +6,13 @@ const ctx = canvas.getContext('2d');
 const gravity = 0.5;
 class Sprite
 {
-    constructor({position, imageSrc})
+    constructor({position, imageSrc},width,height)
     {
         this.position = position;
         this.image = new Image();
         this.image.src = imageSrc;
+        this.width = width;
+        this.height = height;
     }
 
     draw(ctx)
@@ -19,7 +21,7 @@ class Sprite
         {
             return;
         }
-        ctx.drawImage(this.image, this.position.x, this.position.y);
+        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
     }
 
     update()
@@ -65,13 +67,17 @@ const player = new Player();
 let y = 10;
 const keys = {};
 
-const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg2.jpg'});
+const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},canvas.width,canvas.height);
 function gameLoop()
 {
     window.requestAnimationFrame(gameLoop);
     ctx.fillStyle = 'white';
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    background.update();    
+    ctx.save();
+    ctx.scale(4,4);
+    ctx.translate(0,-background.height + canvas.height/4);
+    background.update();
+    ctx.restore();    
     player.update();
 }
 
