@@ -1,0 +1,61 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "1_bit_dungeon_tilest.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Map01.tsx": {
+            "dynamicWrapping": false
+        },
+        "Terrain_and_Props.tsx": {
+            "dynamicWrapping": false,
+            "scaleInEditor": 1
+        },
+        "background.tsx": {
+            "dynamicWrapping": true
+        },
+        "blacknwhite.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 4,
+            "scaleInEditor": 1
+        },
+        "bw_tiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 16
+        },
+        "monochrome_tilemap.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/Asus/OneDrive/Pulpit/CA2_Game_Engine_version2/jsGameEngine/resources/tiled",
+    "map.height": 18,
+    "map.width": 32,
+    "openFiles": [
+    ],
+    "project": "background.tiled-project",
+    "recentFiles": [
+        "bw_tiles.tsx",
+        "monochrome_tilemap.tsx",
+        "blacknwhite.tsx",
+        "1_bit_dungeon_tilest.tsx",
+        "Terrain_and_Props.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    },
+    "tileset.type": 0
+}
