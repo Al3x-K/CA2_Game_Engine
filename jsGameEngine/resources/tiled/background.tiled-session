@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map01.tsx",
+    "activeFile": "background.tsx",
     "expandedProjectPaths": [
         "."
     ],
@@ -50,11 +50,11 @@
             "scaleInEditor": 1
         },
         "tiled1.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 10,
+            "scale": 1,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 415.6666666666667,
-                "y": 246.99999999999997
+                "x": 549.5,
+                "y": 280.5
             }
         }
     },
@@ -72,8 +72,8 @@
     "project": "background.tiled-project",
     "recentFiles": [
         "tiled1.tmx",
-        "background.tsx",
         "Map01.tsx",
+        "background.tsx",
         "redsquare.tsx",
         "bw_tiles.tsx",
         "monochrome_tilemap.tsx",

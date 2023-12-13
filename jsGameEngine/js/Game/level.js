@@ -30,7 +30,7 @@ floorCollisions2D.forEach((row, yIndex) =>
         }
     });
 });
-const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/map.png'},canvas.width,canvas.height);
+const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},canvas.width,canvas.height);
 console.log(collisionBlocks);
 function gameLoop()
 {
@@ -41,6 +41,7 @@ function gameLoop()
     ctx.scale(3.5,3.5);
     ctx.translate(0,-background.height + canvas.height/3.5);
     background.update();
+   
     collisionBlocks.forEach((collisionBlock) =>
     {
         collisionBlock.update();

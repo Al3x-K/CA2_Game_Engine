@@ -7,7 +7,7 @@
  }
  if(typeof module === 'object' && module && module.exports) {
   module.exports = data;
- }})("levelMap",
+ }})("tiles",
 { "compressionlevel":-1,
  "height":18,
  "infinite":false,
@@ -38,12 +38,12 @@
                  "type":"",
                  "visible":true,
                  "width":1132,
-                 "x":-36.6666666666667,
-                 "y":578.666666666667
+                 "x":-36.6667,
+                 "y":578.667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
