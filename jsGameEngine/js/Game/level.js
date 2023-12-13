@@ -1,5 +1,6 @@
 import Player from './player.js';
 import Sprite from '../Engine/sprite.js';
+import CollisionBlock from './collisionBlock.js';
 
 const canvas = document.querySelector('canvas'); 
 const ctx = canvas.getContext('2d');  
@@ -15,14 +16,17 @@ for(let i = 0; i < platformCollisions.length; i+=32)
 {
     platformCollisions2D.push(platformCollisions.slice(i,i+32));
 }
-
-platformCollisions2D.forEach((row) => {
-    row.forEach((symbol) =>
+const collisionBlocks = [];
+platformCollisions2D.forEach((row, rowIndex) => {
+    row.forEach((symbol, columnIndex) =>
     {
-        console.log(symbol);
+        if(symbol === 103)
+        {
+            collisionBlocks.push(new CollisionBlock({position: {x: columnIndex * 32, y: rowIndex * 18}}));
+        }
     });
 });
-
+console.log(collisionBlocks);
 const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/map.png'},canvas.width,canvas.height);
 function gameLoop()
 {
