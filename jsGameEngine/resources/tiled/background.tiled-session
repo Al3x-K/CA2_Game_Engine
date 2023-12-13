@@ -45,6 +45,7 @@
             "scaleInEditor": 1
         },
         "redsquare.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -58,7 +59,7 @@
         }
     },
     "last.exportedFilePath": "C:/Users/Asus/OneDrive/Pulpit/CA2_Game_Engine_version2/jsGameEngine/resources/tiled",
-    "last.imagePath": "C:/Users/Asus/OneDrive/Pulpit/CA2_Game_Engine_version2/jsGameEngine/resources/tiled",
+    "last.imagePath": "C:/Users/Asus/OneDrive/Pulpit/CA2_Game_Engine_version2/jsGameEngine/resources/background",
     "map.height": 18,
     "map.lastUsedExportFilter": "JavaScript map files (*.js)",
     "map.lastUsedFormat": "tmx",

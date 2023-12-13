@@ -9,25 +9,29 @@ const gravity = 0.5;
 
 const player = new Player();
 
+
+
 let y = 10;
 const keys = {};
-const platformCollisions2D = [];
-for(let i = 0; i < platformCollisions.length; i+=32)
+const floorCollisions2D = [];
+for(let i = 0; i < floorCollisions.length; i += 32)
 {
-    platformCollisions2D.push(platformCollisions.slice(i,i+32));
+    floorCollisions2D.push(floorCollisions.slice(i,i+32));
 }
+
 const collisionBlocks = [];
-platformCollisions2D.forEach((row, rowIndex) => {
-    row.forEach((symbol, columnIndex) =>
+floorCollisions2D.forEach((row, yIndex) =>
+{
+    row.forEach((symbol, xIndex) =>
     {
-        if(symbol === 103)
+        if(symbol === 104)
         {
-            collisionBlocks.push(new CollisionBlock({position: {x: columnIndex * 32, y: rowIndex * 18}}));
+            collisionBlocks.push(new CollisionBlock({position: {x: xIndex * 32, y: yIndex * 18}}));
         }
     });
 });
-console.log(collisionBlocks);
 const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/map.png'},canvas.width,canvas.height);
+console.log(collisionBlocks);
 function gameLoop()
 {
     window.requestAnimationFrame(gameLoop);
@@ -37,8 +41,15 @@ function gameLoop()
     ctx.scale(3.5,3.5);
     ctx.translate(0,-background.height + canvas.height/3.5);
     background.update();
-    ctx.restore();    
+    collisionBlocks.forEach((collisionBlock) =>
+    {
+        collisionBlock.update();
+    });
+    ctx.restore();   
+    
+    
     player.update();
+    
 }
 
 gameLoop();
