@@ -7,7 +7,7 @@ const ctx = canvas.getContext('2d');
 
 const gravity = 0.5;
 
-const player = new Player();
+const player = new Player(0,0);
 
 
 

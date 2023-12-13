@@ -1,34 +1,52 @@
-const canvas = document.querySelector('canvas'); 
-const ctx = canvas.getContext('2d');  
+import Sprite from '../Engine/sprite.js';
+import GameObject from '../Engine/gameobject.js';
+import Input from '../Engine/input.js';
 
-class Player
+class Player extends GameObject
 {  
-    constructor()
+    constructor(x,y)
     {
-        this.position = {x: 0, y: 0};
-        this.velocity = {x: 0, y: 1};
+        super(x,y);
+        this.sprite = new Sprite({position: {x: x, y: y}, imageSrc: './resources/player/passiveIdle/pi1.png'},32,32);
+        this.addComponent(this.sprite);
         this.height = 10;
+        this.addComponent(new Input());
+        this.velocity = {x: 0, y: 0};
+        this.direction = 1;
     }
 
-    draw()
-    {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.position.x, this.position.y,10,this.height);
-    }
 
-    update()
+    update(deltaTime)
     {
-        this.draw();
-        this.position.y += this.velocity.y;
-        this.position.x += this.velocity.x;
-        if(this.position.y + this.height + this.velocity.y < canvas.height)
+        const input = this.getComponent(Input);
+        const keys = input.keys;
+        // Handle player movement
+        if (input.isKeyDown('KeyD')) {
+            velocity.x = 100;
+            this.direction = 1;
+        } 
+        else if (input.isKeyDown('KeyA')) 
+        {
+            velocity.x = -100;
+            this.direction = -1;
+        } 
+        else
+        {
+            velocity.x = 0;
+        }
+
+        /*this.draw();
+        const input = this.getComponent(Input);
+        this.y += this.velocity.y;
+        this.x += this.velocity.x;
+        if(this.y + this.height + this.velocity.y < canvas.height)
         {
             this.velocity.y += 0.5;
         }
         else
         {
             this.velocity.y = 0;
-        }
+        }*/
     }
 
 }

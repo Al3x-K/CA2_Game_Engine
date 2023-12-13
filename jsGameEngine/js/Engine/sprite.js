@@ -1,10 +1,12 @@
 const canvas = document.querySelector('canvas'); 
 const ctx = canvas.getContext('2d');  
+import Component from "./component.js";
 
-class Sprite
+class Sprite extends Component
 {
     constructor({position, imageSrc},width,height)
     {
+        super();
         this.position = position;
         this.image = new Image();
         this.image.src = imageSrc;
