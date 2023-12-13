@@ -1,8 +1,8 @@
 const canvas = document.querySelector('canvas'); 
 const ctx = canvas.getContext('2d');  
-import Component from "./component.js";
+import GameObject from "./gameobject.js";
 
-class Sprite extends Component
+class Sprite extends GameObject
 {
     constructor({position, imageSrc},width,height)
     {
@@ -25,6 +25,9 @@ class Sprite extends Component
 
     update()
     {
+        //ctx.save();
+        //ctx.scale(3.5,3.5);
+        //ctx.translate(0,-this.height + canvas.height/3.5);
         this.draw(ctx);
     }
 }

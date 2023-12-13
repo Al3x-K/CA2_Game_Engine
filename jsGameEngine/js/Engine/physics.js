@@ -15,8 +15,8 @@ class Physics extends Component
     {
         this.velocity.x += this.acceleration.x * deltaTime;
         this.velocity.y += (this.acceleration.y + this.gravity.y) * deltaTime;
-        this.gameObject.position.x += this.velocity.x;
-        this.gameObject.position.y += this.velocity.y;
+        this.gameObject.x += this.velocity.x;
+        this.gameObject.y += this.velocity.y;
     }
 
     collision(other)

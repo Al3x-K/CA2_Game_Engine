@@ -1,19 +1,24 @@
-import Sprite from '../Engine/sprite.js';
 import GameObject from '../Engine/gameobject.js';
 import Input from '../Engine/input.js';
 import Physics from '../Engine/physics.js';
+import Renderer from '../Engine/renderer.js';
+import {Images} from '../Engine/resources.js';
 
 class Player extends GameObject
 {  
     constructor(x,y)
     {
         super(x,y);
-        this.sprite = new Sprite({position: {x: x, y: y}, imageSrc: './resources/player/passiveIdle/pi1.png'},32,32);
-        this.addComponent(this.sprite);
-        this.height = 10;
+        this.renderer = new Renderer('blue', 50, 50, Images.player);
+        this.addComponent(this.renderer);
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
         this.addComponent(new Input());
         this.direction = 1;
+        this.isOnPlatform = false;
+        this.isJumping = false;
+        this.jumpForce = 400;
+        this.jumpTime = 0.3;
+        this.jumpTimer = 0;
     }
 
 
@@ -23,13 +28,14 @@ class Player extends GameObject
         const input = this.getComponent(Input);
         const keys = input.keys;
         // Handle player movement
-        if (input.isKeyDown('KeyD')) {
-            physics.velocity.x = 100;
+        if (input.isKeyDown('KeyD')) 
+        {
+            physics.velocity.x = 5;
             this.direction = 1;
         } 
         else if (input.isKeyDown('KeyA')) 
         {
-            physics.velocity.x = -100;
+            physics.velocity.x = -5;
             this.direction = -1;
         } 
         else
@@ -37,18 +43,17 @@ class Player extends GameObject
             physics.velocity.x = 0;
         }
 
-        /*this.draw();
-        const input = this.getComponent(Input);
-        this.y += this.velocity.y;
-        this.x += this.velocity.x;
-        if(this.y + this.height + this.velocity.y < canvas.height)
+        if (input.isKeyDown('KeyW') && this.isOnPlatform)
         {
-            this.velocity.y += 0.5;
+            this.startJump();
         }
-        else
+      
+        if (this.isJumping) 
         {
-            this.velocity.y = 0;
-        }*/
+            this.updateJump(deltaTime);
+        }
+
+        super.update(deltaTime);
     }
 
 }
