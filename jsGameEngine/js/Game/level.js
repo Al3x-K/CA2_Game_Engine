@@ -1,11 +1,27 @@
+import Game from '../Engine/game.js';
 import Player from './player.js';
 import Sprite from '../Engine/sprite.js';
 import CollisionBlock from './collisionBlock.js';
 
+class Level extends Game
+{
+    constructor(canvasId)
+    {
+        super(canvasId);
+        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},this.canvas.width,this.canvas.height);
+        this.add(background);
+        const player = new Player(0,0);
+        this.add(player);
+        this.camera.target = player;
+
+        this.camera.target = player;
+    }
+}
+
+export default Level;
+/*
 const canvas = document.querySelector('canvas'); 
 const ctx = canvas.getContext('2d');  
-
-const gravity = 0.5;
 
 const player = new Player(0,0);
 
@@ -55,31 +71,4 @@ function gameLoop()
 
 gameLoop();
 
-window.addEventListener('keydown', (event) => 
-{
-    switch(event.key)
-    {
-        case 'd': 
-            player.velocity.x = 1;
-        break;
-        case 'a': 
-            player.velocity.x = -1;
-        break;
-        case 'w': 
-            player.velocity.y = -10;
-        break;
-    }
-});
-
-window.addEventListener('keyup', (event) => 
-{
-    switch(event.key)
-    {
-        case 'd': 
-            player.velocity.x = 0;
-        break;
-        case 'a': 
-            player.velocity.x = 0;
-        break;
-    }
-});
+*/
