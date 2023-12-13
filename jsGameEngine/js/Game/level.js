@@ -66,16 +66,22 @@ const player = new Player();
 
 let y = 10;
 const keys = {};
+const platformCollisions2D = [];
+for(let i = 0; i < platformCollisions.length; i+=32)
+{
+    platformCollisions2D.push(platformCollisions.slice(i,i+32));
+}
+console.log(platformCollisions2D);
 
-const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},canvas.width,canvas.height);
+const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/map.png'},canvas.width,canvas.height);
 function gameLoop()
 {
     window.requestAnimationFrame(gameLoop);
     ctx.fillStyle = 'white';
     ctx.fillRect(0,0,canvas.width,canvas.height);
     ctx.save();
-    ctx.scale(4,4);
-    ctx.translate(0,-background.height + canvas.height/4);
+    ctx.scale(3.5,3.5);
+    ctx.translate(0,-background.height + canvas.height/3.5);
     background.update();
     ctx.restore();    
     player.update();
