@@ -62,12 +62,16 @@ class Level extends Game
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
 
-        this.add(new Key(115, 450, 25, 10));
-        this.add(new Key(645, 230, 25, 10));
+        this.add(new Key(115, 450));
+        this.add(new Key(645, 230));
+        this.add(new Key(1290, 360));
         
-        this.add(new Gem(1090, 360, 25, 10));
-
-        
+        this.add(new Gem(445, 470));
+        this.add(new Gem(285, 115));
+        this.add(new Gem(660, 117));
+        this.add(new Gem(930, 380));
+        this.add(new Gem(980, 600));
+        this.add(new Gem(1400, 120));
         
     }
     
