@@ -10,7 +10,7 @@ class Gem extends GameObject
         super(x,y);
         this.renderer = new Renderer('yellow', 20, 15, Images.gem);
         this.addComponent(this.renderer);
-        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 },{ x: 0, y: 0 }));
         this.tag = 'collectible';
         this.value = 1;
     }

@@ -3,7 +3,7 @@ import Renderer from "./renderer.js";
 
 class Physics extends Component
 {
-    constructor(velocity = {x: 0, y: 0}, acceleration = {x: 0, y: 0}, gravity = {x: 0, y: 0})
+    constructor(velocity = {x: 0, y: 0}, acceleration = {x: 0, y: 0}, gravity = {x: 0, y: 10})
     {
         super();
         this.velocity = velocity;
@@ -21,15 +21,10 @@ class Physics extends Component
 
     collision(otherPhysics)
     {
-        var collided = true;
         const [left, right, top, bottom] = this.getBoundingBox();
         const [otherLeft, otherRight, otherTop, otherBottom] = otherPhysics.getBoundingBox();
     
-        if(bottom < otherTop || top > otherBottom || right < otherLeft || left > otherRight)
-        {
-            collided = false;
-        }
-        return collided;
+        return left < otherRight && right > otherLeft && top < otherBottom && bottom > otherTop;
     }
 
     getBoundingBox()

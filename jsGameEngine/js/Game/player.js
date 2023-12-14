@@ -14,12 +14,12 @@ class Player extends GameObject
         super(x,y);
         this.renderer = new Renderer('blue', 50, 50, Images.player);
         this.addComponent(this.renderer);
-        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 },{ x: 0, y: 1 }));
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
         this.addComponent(new Input());
         this.direction = 1;
         this.isOnPlatform = false;
         this.isJumping = false;
-        this.jumpForce = 1.3;
+        this.jumpForce = 5;
         this.jumpTime = 0.3;
         this.jumpTimer = 0;
     }
@@ -66,7 +66,22 @@ class Player extends GameObject
                 if(this.left < platform.right)
                 {
                     this.velocity.x = 0;
-                    this.direction 
+                    this.direction = 1;
+                }
+                else if(this.right > platform.left)
+                {
+                    this.velocity.x = 0;
+                    this.direction = -1;
+                }
+                else if(this.bottom > platform.top)
+                {
+                    this.velocity.y = 0;
+                    this.getComponent(Physics).gravity.y = 0;
+                }
+                else if(this.top < platform.bottom)
+                {
+                    this.velocity.y = 0;
+                    this.isOnPlatform = false;
                 }
                 if (!this.isJumping) 
                 {
