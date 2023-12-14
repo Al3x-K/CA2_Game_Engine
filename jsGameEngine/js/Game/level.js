@@ -2,14 +2,16 @@ import Game from '../Engine/game.js';
 import Player from './player.js';
 import Sprite from '../Engine/sprite.js';
 import Platform from './platforms.js';
-import {Images} from '../Engine/resources.js';
+import Key from './key.js';
+import { Images } from '../Engine/resources.js';
+import Gem from './gem.js';
 
 class Level extends Game
 {
     constructor(canvasId)
     {
         super(canvasId);
-        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},this.canvas.width,this.canvas.height);
+        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/map.png'},this.canvas.width,this.canvas.height);
         this.add(background);
         const player = new Player(50, 700);
         this.add(player);
@@ -59,6 +61,14 @@ class Level extends Game
 
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
+
+        this.add(new Key(115, 450, 25, 10));
+        this.add(new Key(645, 230, 25, 10));
+        
+        this.add(new Gem(1090, 360, 25, 10));
+
+        
+        
     }
     
 }

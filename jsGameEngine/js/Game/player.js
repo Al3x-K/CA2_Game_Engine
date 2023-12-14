@@ -4,6 +4,7 @@ import Physics from '../Engine/physics.js';
 import Renderer from '../Engine/renderer.js';
 import {Images} from '../Engine/resources.js';
 import Platform from './platforms.js';
+import Key from './key.js';
 
 class Player extends GameObject
 {  
@@ -12,7 +13,7 @@ class Player extends GameObject
         super(x,y);
         this.renderer = new Renderer('blue', 50, 50, Images.player);
         this.addComponent(this.renderer);
-        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 },{ x: 0, y: 1 }));
         this.addComponent(new Input());
         this.direction = 1;
         this.isOnPlatform = false;
@@ -76,6 +77,16 @@ class Player extends GameObject
                 }
             }
         }
+
+        const collectibleKey = this.game.gameObjects.filter((obj) => obj instanceof Key);
+        for (const key of collectibleKey) 
+        {
+            if (physics.collision(key.getComponent(Physics))) 
+            {
+                this.collect(key);
+                this.game.destroy(key);
+            }
+        }
         super.update(deltaTime);
     }
     startJump() 
@@ -100,6 +111,14 @@ class Player extends GameObject
             this.isJumping = false;
         }
       }
+
+    collect(collectible) 
+    {
+    // Handle collectible pickup
+        this.score += collectible.value;
+        console.log(`Score: ${this.score}`);
+        //this.emitCollectParticles(collectible);
+    }
 
 }
 

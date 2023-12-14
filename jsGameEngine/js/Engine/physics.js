@@ -3,7 +3,7 @@ import Renderer from "./renderer.js";
 
 class Physics extends Component
 {
-    constructor(velocity = {x: 0, y: 0}, acceleration = {x: 0, y: 0}, gravity = {x: 0, y: 1})
+    constructor(velocity = {x: 0, y: 0}, acceleration = {x: 0, y: 0}, gravity = {x: 0, y: 0})
     {
         super();
         this.velocity = velocity;
