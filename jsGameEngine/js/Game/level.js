@@ -11,7 +11,7 @@ class Level extends Game
     constructor(canvasId)
     {
         super(canvasId);
-        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/map.png'},this.canvas.width,this.canvas.height);
+        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},this.canvas.width,this.canvas.height);
         this.add(background);
         const player = new Player(50, 700);
         this.add(player);

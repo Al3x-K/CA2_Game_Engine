@@ -5,6 +5,7 @@ import Renderer from '../Engine/renderer.js';
 import {Images} from '../Engine/resources.js';
 import Platform from './platforms.js';
 import Key from './key.js';
+import Gem from './gem.js';
 
 class Player extends GameObject
 {  
@@ -85,6 +86,16 @@ class Player extends GameObject
             {
                 this.collect(key);
                 this.game.destroy(key);
+            }
+        }
+
+        const collectibleGems = this.game.gameObjects.filter((obj) => obj instanceof Gem);
+        for (const gem of collectibleGems) 
+        {
+            if (physics.collision(gem.getComponent(Physics))) 
+            {
+                this.collect(gem);
+                this.game.destroy(gem);
             }
         }
         super.update(deltaTime);
