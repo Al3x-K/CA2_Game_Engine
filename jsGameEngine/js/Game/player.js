@@ -17,7 +17,7 @@ class Player extends GameObject
         this.direction = 1;
         this.isOnPlatform = false;
         this.isJumping = false;
-        this.jumpForce = 400;
+        this.jumpForce = 1.3;
         this.jumpTime = 0.3;
         this.jumpTimer = 0;
     }
@@ -31,12 +31,12 @@ class Player extends GameObject
         // Handle player movement
         if (input.isKeyDown('KeyD')) 
         {
-            physics.velocity.x = 5;
+            physics.velocity.x = 2.5;
             this.direction = 1;
         } 
         else if (input.isKeyDown('KeyA')) 
         {
-            physics.velocity.x = -5;
+            physics.velocity.x = -2.5;
             this.direction = -1;
         } 
         else
@@ -64,7 +64,8 @@ class Player extends GameObject
                 {
                     physics.velocity.y = 0;
                     physics.acceleration.y = 0;
-                    this.y = platform.y - this.renderer.height;
+                    
+                    //this.y = platform.y - this.renderer.height;
                     this.isOnPlatform = true;
                 }
             }
@@ -79,6 +80,7 @@ class Player extends GameObject
             this.isJumping = true;
             this.jumpTimer = this.jumpTime;
             this.getComponent(Physics).velocity.y = -this.jumpForce;
+            this.y += this.getComponent(Physics).gravity.y;
             this.isOnPlatform = false;
         }
       }

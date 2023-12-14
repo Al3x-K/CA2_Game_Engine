@@ -1,7 +1,6 @@
 import Game from '../Engine/game.js';
 import Player from './player.js';
 import Sprite from '../Engine/sprite.js';
-import CollisionBlock from './collisionBlock.js';
 import Platform from './platforms.js';
 import {Images} from '../Engine/resources.js';
 
@@ -16,7 +15,7 @@ class Level extends Game
         this.add(player);
         this.camera.target = player;
 
-        const horizontalPlatforms = 
+        const platforms = 
         [
             new Platform(0,748,1700,40),
             new Platform(50,617,269,40),
@@ -38,22 +37,26 @@ class Level extends Game
             new Platform(1387,615,55, 40),
             new Platform(1490,615,165, 40),
             new Platform(1225,703,55, 40),
+            new Platform(535,660,265,100),
+            new Platform(1067,615,160,150),
+            new Platform(0,45,50,710),
+            new Platform(1655,38,50,620),
+            new Platform(320,300,50,90),
+            new Platform(430,38,50,270),
+            new Platform(480,405,105,250),
+            new Platform(694,170,53, 400),
+            new Platform(1013,265,53, 175),
+            new Platform(1013,568,53, 90),
+            new Platform(1440,615,53, 140),
+            new Platform(1334,265,53, 160),
+            new Platform(1227,397,53, 130),
+            new Platform(1227,40,53, 130),
         ];
-        for (const horizontalPlatform of horizontalPlatforms) 
+        for (const platform of platforms) 
         {
-            this.add(horizontalPlatform);
+            this.add(platform);
         }
 
-        const verticalPlatforms = 
-        [
-            new Platform(0,45,50,710),
-            new Platform(1655,45,50,710),
-            
-        ];
-        for (const verticalPlatform of verticalPlatforms) 
-        {
-            this.add(verticalPlatform);
-        }
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
     }
