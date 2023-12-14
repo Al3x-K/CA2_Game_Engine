@@ -13,7 +13,7 @@ class Level extends Game
         super(canvasId);
         const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},this.canvas.width,this.canvas.height);
         this.add(background);
-        const player = new Player(50, 700);
+        const player = new Player(70, 680);
         this.add(player);
         this.camera.target = player;
 

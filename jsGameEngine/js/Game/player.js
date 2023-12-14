@@ -12,7 +12,7 @@ class Player extends GameObject
     constructor(x,y)
     {
         super(x,y);
-        this.renderer = new Renderer('blue', 50, 50, Images.player);
+        this.renderer = new Renderer('blue', 20, 32, Images.player);
         this.addComponent(this.renderer);
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
         this.addComponent(new Input());
@@ -20,7 +20,7 @@ class Player extends GameObject
         this.isOnPlatform = false;
         this.isJumping = false;
         this.jumpForce = 5;
-        this.jumpTime = 0.3;
+        this.jumpTime = 0.1;
         this.jumpTimer = 0;
     }
 
@@ -58,41 +58,43 @@ class Player extends GameObject
 
         this.isOnPlatform = false;  // Reset this before checking collisions with platforms
         const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
-        const [left, right, top, bottom] = physics.getBoundingBox();
         for (const platform of platforms) 
         {
             if (physics.collision(platform.getComponent(Physics))) 
             {
-                if(this.left < platform.right)
-                {
-                    this.velocity.x = 0;
-                    this.direction = 1;
-                }
-                else if(this.right > platform.left)
-                {
-                    this.velocity.x = 0;
-                    this.direction = -1;
-                }
-                else if(this.bottom > platform.top)
-                {
-                    this.velocity.y = 0;
-                    this.getComponent(Physics).gravity.y = 0;
-                }
-                else if(this.top < platform.bottom)
-                {
-                    this.velocity.y = 0;
-                    this.isOnPlatform = false;
-                }
                 if (!this.isJumping) 
                 {
-                    physics.velocity.y = 0;
-                    physics.acceleration.y = 0;
                     
-                    //this.y = platform.y - this.renderer.height;
-                    this.isOnPlatform = true;
+                    //physics.velocity.x = 0;  
+                    if(this.y > platform.y + platform.getComponent(Renderer).height - 30)
+                    {
+                        this.y = platform.y + platform.getComponent(Renderer).height;
+                        physics.velocity.y = 0;  
+                        physics.acceleration.y = 0; 
+                    }
+                    else if (this.y < platform.y - this.renderer.height + 10)
+                    {
+                        this.y = platform.y - this.renderer.height; 
+                        this.isOnPlatform = true;
+                        physics.velocity.y = 0;  
+                        physics.acceleration.y = 0; 
+                    }
+
+                    
+                    
                 }
+                if(this.x > platform.x + platform.getComponent(Renderer).width - 10)
+                    {
+                        this.x = platform.x + platform.getComponent(Renderer).width;
+                    }
+                    else if (this.x < platform.x - this.renderer.width + 10)
+                    {
+                        this.x = platform.x - this.renderer.width; 
+                       
+                        
+                    }
             }
-        }
+        }   
 
         const collectibleKey = this.game.gameObjects.filter((obj) => obj instanceof Key);
         for (const key of collectibleKey) 

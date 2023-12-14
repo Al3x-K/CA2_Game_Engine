@@ -18,14 +18,15 @@ class Physics extends Component
         this.gameObject.x += this.velocity.x;
         this.gameObject.y += this.velocity.y;
     }
-
     collision(otherPhysics)
     {
-        const [left, right, top, bottom] = this.getBoundingBox();
-        const [otherLeft, otherRight, otherTop, otherBottom] = otherPhysics.getBoundingBox();
-    
-        return left < otherRight && right > otherLeft && top < otherBottom && bottom > otherTop;
+        const [left, right, top, bottom] = this.getBoundingBox();// Get the object's bounding box
+        const [otherLeft, otherRight, otherTop, otherBottom] = otherPhysics.getBoundingBox();// Get the other object's bounding box
+        const horizontalCollision = right >= otherLeft && left <= otherRight;
+        const verticalCollision = bottom >= otherTop && top <= otherBottom;
+        return horizontalCollision && verticalCollision;
     }
+    
 
     getBoundingBox()
     {
