@@ -56,10 +56,16 @@ class Player extends GameObject
 
         this.isOnPlatform = false;  // Reset this before checking collisions with platforms
         const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
+        const [left, right, top, bottom] = physics.getBoundingBox();
         for (const platform of platforms) 
         {
             if (physics.collision(platform.getComponent(Physics))) 
             {
+                if(this.left < platform.right)
+                {
+                    this.velocity.x = 0;
+                    this.direction 
+                }
                 if (!this.isJumping) 
                 {
                     physics.velocity.y = 0;

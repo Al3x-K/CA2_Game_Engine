@@ -21,10 +21,15 @@ class Physics extends Component
 
     collision(otherPhysics)
     {
+        var collided = true;
         const [left, right, top, bottom] = this.getBoundingBox();
         const [otherLeft, otherRight, otherTop, otherBottom] = otherPhysics.getBoundingBox();
     
-        return left < otherRight && right > otherLeft && top < otherBottom && bottom > otherTop;
+        if(bottom < otherTop || top > otherBottom || right < otherLeft || left > otherRight)
+        {
+            collided = false;
+        }
+        return collided;
     }
 
     getBoundingBox()
