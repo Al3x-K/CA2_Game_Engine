@@ -4,6 +4,7 @@ import Sprite from '../Engine/sprite.js';
 import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
+import CollisionBlock from './collisionBlock.js';
 
 class Level extends Game
 {
@@ -57,7 +58,24 @@ class Level extends Game
         {
             this.add(platform);
         }
+        //portal set1
+        this.add(new CollisionBlock(55, 40, 50, 100));
+        this.add(new CollisionBlock(1603, 40, 50, 100));
 
+        //portal set2
+        this.add(new CollisionBlock(1020, 650, 50, 100));
+        this.add(new CollisionBlock(480, 40, 50, 100));
+
+        //portal set3
+        this.add(new CollisionBlock(750, 170, 50, 100));
+        this.add(new CollisionBlock(1175, 40, 50, 100));
+        //portal set4
+        this.add(new CollisionBlock(1285, 140, 100, 30));
+        this.add(new CollisionBlock(580, 440, 120, 40));
+
+        //portal set5
+        this.add(new CollisionBlock(1390, 650, 50, 100));
+        this.add(new CollisionBlock(1490, 650, 50, 100));
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
 
@@ -74,6 +92,8 @@ class Level extends Game
 
         const winCon = new Sprite({position: {x: 1630, y: 710}, imageSrc: './resources/tiled/winCon.png'},40,40);
         this.add(winCon);
+
+        
         
     }
     

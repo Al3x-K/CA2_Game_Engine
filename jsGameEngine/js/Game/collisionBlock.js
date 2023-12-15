@@ -1,24 +1,17 @@
-const canvas = document.querySelector('canvas'); 
-const ctx = canvas.getContext('2d');  
+import GameObject from '../Engine/gameobject.js';
+import Renderer from '../Engine/renderer.js';
+import Physics from '../Engine/physics.js';
 
-class CollisionBlock
+class CollisionBlock extends GameObject 
 {
-    constructor({position})
+  
+    constructor(x, y, width, height, color = 'rgba(255,0,0,0.5)') 
     {
-        this.position = position;
-        this.width = 32;
-        this.height = 32;
+        super(x, y);
+        this.addComponent(new Renderer(color, width, height));
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }));
+        this.tag = 'platform'; 
     }
-
-    draw(ctx)
-    {
-        ctx.fillStyle = 'rgba(255,0,0,0.5)';
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
-
-    update()
-    {
-        this.draw(ctx);
-    }
-}
-export default CollisionBlock;
+  }
+  
+  export default CollisionBlock;
