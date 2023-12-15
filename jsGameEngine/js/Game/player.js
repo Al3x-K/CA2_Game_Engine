@@ -12,7 +12,7 @@ class Player extends GameObject
     constructor(x,y)
     {
         super(x,y);
-        this.renderer = new Renderer('blue', 20, 32, Images.player);
+        this.renderer = new Renderer('blue', 22, 34, Images.player);
         this.addComponent(this.renderer);
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
         this.addComponent(new Input());
@@ -78,21 +78,17 @@ class Player extends GameObject
                         this.isOnPlatform = true;
                         physics.velocity.y = 0;  
                         physics.acceleration.y = 0; 
-                    }
-
-                    
-                    
+                    }   
                 }
+
                 if(this.x > platform.x + platform.getComponent(Renderer).width - 10)
-                    {
-                        this.x = platform.x + platform.getComponent(Renderer).width;
-                    }
-                    else if (this.x < platform.x - this.renderer.width + 10)
-                    {
-                        this.x = platform.x - this.renderer.width; 
-                       
-                        
-                    }
+                {
+                    this.x = platform.x + platform.getComponent(Renderer).width;
+                }
+                else if (this.x < platform.x - this.renderer.width + 10)
+                {
+                    this.x = platform.x - this.renderer.width;         
+                }
             }
         }   
 

@@ -3,7 +3,6 @@ import Player from './player.js';
 import Sprite from '../Engine/sprite.js';
 import Platform from './platforms.js';
 import Key from './key.js';
-import { Images } from '../Engine/resources.js';
 import Gem from './gem.js';
 
 class Level extends Game
@@ -72,6 +71,9 @@ class Level extends Game
         this.add(new Gem(930, 380));
         this.add(new Gem(980, 600));
         this.add(new Gem(1400, 120));
+
+        const winCon = new Sprite({position: {x: 1630, y: 710}, imageSrc: './resources/tiled/winCon.png'},40,40);
+        this.add(winCon);
         
     }
     
