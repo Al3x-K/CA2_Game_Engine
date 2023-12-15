@@ -5,12 +5,14 @@ import Physics from '../Engine/physics.js';
 class CollisionBlock extends GameObject 
 {
   
-    constructor(x, y, width, height, color = 'rgba(255,0,0,0.5)') 
+    constructor(x, y, width, height, color, id) 
     {
         super(x, y);
         this.addComponent(new Renderer(color, width, height));
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }));
         this.tag = 'platform'; 
+        this.id = id;
+        this.color = color;
     }
   }
   

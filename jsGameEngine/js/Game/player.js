@@ -6,6 +6,7 @@ import {Images} from '../Engine/resources.js';
 import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
+import CollisionBlock from './collisionBlock.js';
 
 class Player extends GameObject
 {  
@@ -22,6 +23,8 @@ class Player extends GameObject
         this.jumpForce = 5;
         this.jumpTime = 0.1;
         this.jumpTimer = 0;
+        this.score = 0;
+        this.numOfKeys = 0;
     }
 
 
@@ -66,32 +69,86 @@ class Player extends GameObject
                 {
                     
                     //physics.velocity.x = 0;  
-                    if(this.y > platform.y + platform.getComponent(Renderer).height - 30)
+                    if(this.y > platform.y + platform.getComponent(Renderer).height - 30) //30 is the threshold for the player to be on the platform    
                     {
-                        this.y = platform.y + platform.getComponent(Renderer).height;
-                        physics.velocity.y = 0;  
+                        this.y = platform.y + platform.getComponent(Renderer).height; 
+                        physics.velocity.y = 0;   // Stop falling
                         physics.acceleration.y = 0; 
                     }
-                    else if (this.y < platform.y - this.renderer.height + 10)
+                    else if (this.y < platform.y - this.renderer.height + 10) //10 is the threshold for the player to be on the platform
                     {
-                        this.y = platform.y - this.renderer.height; 
-                        this.isOnPlatform = true;
+                        this.y = platform.y - this.renderer.height;  
+                        this.isOnPlatform = true; // Set this to true so we can jump
                         physics.velocity.y = 0;  
                         physics.acceleration.y = 0; 
                     }   
                 }
 
-                if(this.x > platform.x + platform.getComponent(Renderer).width - 10)
+                if(this.x > platform.x + platform.getComponent(Renderer).width - 10) 
                 {
-                    this.x = platform.x + platform.getComponent(Renderer).width;
+                    this.x = platform.x + platform.getComponent(Renderer).width; // Stop moving right
                 }
                 else if (this.x < platform.x - this.renderer.width + 10)
                 {
-                    this.x = platform.x - this.renderer.width;         
+                    this.x = platform.x - this.renderer.width; // Stop moving left
                 }
             }
         }   
 
+        const portals = this.game.gameObjects.filter((obj) => obj instanceof CollisionBlock);
+        for (const portal of portals)
+        {
+            if (physics.collision(portal.getComponent(Physics)))
+            {
+                if(portal.id == 1 && this.score >= 1) //portal 1
+                {
+                    this.x = 1550; 
+                    this.y = 100;
+                }
+                else if(portal.id == 2 && this.score >= 2) //portal 2
+                {
+                    this.x = 120;
+                    this.y = 100;
+                }
+                else if(portal.id == 3 && this.score >= 2) //portal 3
+                {
+                    this.x = 650;
+                    this.y = 500;
+                }
+                else if(portal.id == 4 && this.score >= 3) //portal 4
+                {
+                    this.x = 1390;
+                    this.y = 100;
+                }
+                else if(portal.id == 5 && this.score >= 3) //portal 5
+                {
+                    this.x = 550;
+                    this.y = 100;
+                }
+                else if (portal.id == 6 && this.score >= 4) //portal 6
+                {
+                    this.x = 1000;
+                    this.y = 680;
+                }
+                else if (portal.id == 7 && this.score >= 4) //portal 7
+                {
+                    this.x = 800;
+                    this.y = 200;
+                }
+                //player can't go back through portal 8
+                else if (portal.id == 9 && this.score >= 6)
+                {
+                    this.x = 1550;
+                    this.y = 680;
+                }
+                else if (portal.id == 10 && this.score >= 6)
+                {
+                    this.x = 1350;
+                    this.y = 680;
+                }
+               
+            }
+        }
         const collectibleKey = this.game.gameObjects.filter((obj) => obj instanceof Key);
         for (const key of collectibleKey) 
         {
@@ -139,11 +196,25 @@ class Player extends GameObject
     collect(collectible) 
     {
     // Handle collectible pickup
-        this.score += collectible.value;
-        console.log(`Score: ${this.score}`);
-        //this.emitCollectParticles(collectible);
+        if (collectible instanceof Gem) 
+        {
+            this.score += collectible.value;
+            //this.emitCollectParticles(collectible);
+        } 
+        else if (collectible instanceof Key) 
+        {
+            this.numOfKeys += 1;
+            //this.emitCollectParticles(collectible);
+        }
+        
     }
-
+/*
+    emitCollectParticles() 
+    {
+        // Create a particle system at the player's position when a collectible is collected
+        const particleSystem = new ParticleSystem(this.x, this.y, 'yellow', 20, 1, 0.5);
+        this.game.addGameObject(particleSystem);
+    }*/
 }
 
 export default Player;

@@ -38,19 +38,19 @@ class Level extends Game
             new Platform(1600,527,55, 40),
             new Platform(1387,615,55, 40),
             new Platform(1490,615,165, 40),
-            new Platform(1225,703,55, 40),
+            new Platform(1225,709,55, 40),
             new Platform(535,660,265,100),
             new Platform(1067,615,160,150),
             new Platform(0,45,50,710),
             new Platform(1655,38,50,620),
             new Platform(320,300,50,90),
             new Platform(430,38,50,270),
-            new Platform(480,405,105,250),
+            new Platform(480,405,105,253),
             new Platform(694,170,53, 400),
             new Platform(1013,265,53, 175),
             new Platform(1013,568,53, 90),
             new Platform(1440,615,53, 140),
-            new Platform(1334,265,53, 160),
+            new Platform(1334,266,50, 150),
             new Platform(1227,397,53, 130),
             new Platform(1227,40,53, 130),
         ];
@@ -59,23 +59,26 @@ class Level extends Game
             this.add(platform);
         }
         //portal set1
-        this.add(new CollisionBlock(55, 40, 50, 100));
-        this.add(new CollisionBlock(1603, 40, 50, 100));
+        this.add(new CollisionBlock(55, 40, 50, 100,'rgba(255,0,0,0)', 1));
+        this.add(new CollisionBlock(1603, 40, 50, 100,'rgba(255,0,0,0)', 2));
 
         //portal set2
-        this.add(new CollisionBlock(1020, 650, 50, 100));
-        this.add(new CollisionBlock(480, 40, 50, 100));
+        this.add(new CollisionBlock(1285, 140, 100, 30,'rgba(255,0,0,0)', 3));
+        this.add(new CollisionBlock(580, 440, 120, 40,'rgba(255,0,0,0)', 4));
 
         //portal set3
-        this.add(new CollisionBlock(750, 170, 50, 100));
-        this.add(new CollisionBlock(1175, 40, 50, 100));
+        this.add(new CollisionBlock(1020, 650, 50, 100,'rgba(255,0,0,0)', 5));
+        this.add(new CollisionBlock(480, 40, 50, 100,'rgba(255,0,0,0)', 6));
+
         //portal set4
-        this.add(new CollisionBlock(1285, 140, 100, 30));
-        this.add(new CollisionBlock(580, 440, 120, 40));
+        this.add(new CollisionBlock(1175, 40, 50, 100,'rgba(255,0,0,0)', 7));
+        this.add(new CollisionBlock(750, 170, 50, 100,'rgba(255,0,0,0)',8));
 
         //portal set5
-        this.add(new CollisionBlock(1390, 650, 50, 100));
-        this.add(new CollisionBlock(1490, 650, 50, 100));
+        this.add(new CollisionBlock(1390, 650, 50, 100,'rgba(255,0,0,0)', 9));
+        this.add(new CollisionBlock(1490, 650, 50, 100,'rgba(255,0,0,0)', 10));
+      
+        
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
 
