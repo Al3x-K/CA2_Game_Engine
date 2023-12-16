@@ -7,6 +7,7 @@ import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
 import CollisionBlock from './collisionBlock.js';
+import ParticleSystem from '../Engine/particleSystem.js';
 
 class Player extends GameObject
 {  
@@ -199,7 +200,7 @@ class Player extends GameObject
         if (collectible instanceof Gem) 
         {
             this.score += collectible.value;
-            //this.emitCollectParticles(collectible);
+            this.emitCollectParticles(collectible);
         } 
         else if (collectible instanceof Key) 
         {
@@ -208,13 +209,13 @@ class Player extends GameObject
         }
         
     }
-/*
+
     emitCollectParticles() 
     {
         // Create a particle system at the player's position when a collectible is collected
         const particleSystem = new ParticleSystem(this.x, this.y, 'yellow', 20, 1, 0.5);
         this.game.addGameObject(particleSystem);
-    }*/
+    }
 }
 
 export default Player;
