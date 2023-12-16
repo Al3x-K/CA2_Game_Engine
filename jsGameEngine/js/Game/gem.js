@@ -12,7 +12,6 @@ class Gem extends GameObject
         this.addComponent(this.renderer);
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 },{ x: 0, y: 0 }));
         this.tag = 'collectible';
-        this.value = 1;
     }
 }
 

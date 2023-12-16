@@ -1,27 +1,29 @@
-import GameObject from "./gameobject.js";
-import Renderer from "./renderer.js";
-import Physics from "./physics.js";
+import GameObject from '../Engine/gameobject.js';
+import Renderer from '../Engine/renderer.js';
+import Physics from '../Engine/physics.js';
 
-class Particle extends GameObject
+
+class Particle extends GameObject 
 {
-    constructor(x,y,width,height, color, duration, image) // image is optional
+  
+    constructor(x, y, width, height, color, duration) 
     {
-        super(x,y); // call the constructor of the parent class
-        this.duration = duration; // how long the particle will last
-        this.addComponent(new Renderer(color, width, height, image)); // add a renderer component
-        this.addComponent(new Physics({x:0,y:0},{x:0,y:0})); // add a physics component
+        super(x, y); // Call the super constructor
+        this.duration = duration; // The duration of the particle
+        this.addComponent(new Renderer(color, width, height)); // Add a renderer component to the particle
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add a physics component to the particle
     }
 
-    update(deltaTime) // override the update method
+    
+    update(deltaTime) 
     {
-        this.duration -= deltaTime; // decrement the duration
-        if(this.duration <= 0) // if the duration is less than or equal to 0
-        {
-            this.game.destroy(this); // destroy the particle
+        this.duration -= deltaTime; // Decrement the duration of the particle
+        if (this.duration <= 0)  // If the particle is done
+        {    
+            this.game.destroy(this);// Destroy the particle
         }
-
-        super.update(deltaTime); // call the update method of the parent class
-    }
+        super.update(deltaTime); // Call the super update method
+     }
 }
 
 export default Particle;

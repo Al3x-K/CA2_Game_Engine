@@ -171,6 +171,7 @@ class Player extends GameObject
         }
         super.update(deltaTime);
     }
+
     startJump() 
     {
         // Initiate a jump if the player is on a platform
@@ -182,39 +183,45 @@ class Player extends GameObject
             this.y += this.getComponent(Physics).gravity.y;
             this.isOnPlatform = false;
         }
-      }
+    }
       
-      updateJump(deltaTime) 
-      {
+    updateJump(deltaTime) 
+    {
         // Updates the jump progress over time
         this.jumpTimer -= deltaTime;
         if (this.jumpTimer <= 0 || this.getComponent(Physics).velocity.y > 0) 
         {
             this.isJumping = false;
         }
-      }
+    }
 
     collect(collectible) 
     {
-    // Handle collectible pickup
-        if (collectible instanceof Gem) 
+        if (collectible instanceof Gem) // If the collectible is a gem
         {
-            this.score += collectible.value;
-            this.emitCollectParticles(collectible);
+            this.score += 1; // Increment the score
+            this.emitCollectParticlesGems(collectible); // Emit particles
+            console.log('score' + this.score); 
         } 
-        else if (collectible instanceof Key) 
+        else if (collectible instanceof Key) // If the collectible is a key
         {
-            this.numOfKeys += 1;
-            //this.emitCollectParticles(collectible);
+            this.numOfKeys += 1; // Increment the number of keys
+            this.emitCollectParticlesKeys(collectible); // Emit particles
+            console.log('keys' + this.numOfKeys);
         }
         
     }
 
-    emitCollectParticles() 
+    emitCollectParticlesGems() // Emit particles when the player collects a gem
     {
-        // Create a particle system at the player's position when a collectible is collected
-        const particleSystem = new ParticleSystem(this.x, this.y, 'yellow', 20, 1, 0.5);
-        this.game.addGameObject(particleSystem);
+        const particleSystem = new ParticleSystem(this.x, this.y, 'red', 20, 1, 1); // Create a new particle system
+        this.game.add(particleSystem); // Add the particle system to the game
+    }
+
+    emitCollectParticlesKeys() // Emit particles when the player collects a key
+    {
+        const particleSystem = new ParticleSystem(this.x,this.y,'yellow',20,1,1); // Create a new particle system
+        this.game.add(particleSystem); // Add the particle system to the game
     }
 }
 
