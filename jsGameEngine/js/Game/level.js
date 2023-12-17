@@ -13,14 +13,14 @@ class Level extends Game
 {
     constructor(canvasId)
     {
-        super(canvasId);
-        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},this.canvas.width,this.canvas.height);
-        this.add(background);
-        const player = new Player(70, 680);
-        this.add(player);
-        this.camera.target = player;
+        super(canvasId); // Call the super constructor
+        const background = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/background/bg1.jpg'},this.canvas.width,this.canvas.height); // Create a new Sprite instance for the background
+        this.add(background); // Add the background to the game
+        const player = new Player(70, 680); // Create a new Player instance
+        this.add(player); // Add the player to the game
+        this.camera.target = player; // Set the camera target to the player
         
-
+        //platforms
         const platforms = 
         [
             new Platform(0,748,1700,40),
@@ -58,33 +58,37 @@ class Level extends Game
             new Platform(1227,397,53, 130),
             new Platform(1227,40,53, 130),
         ];
-        for (const platform of platforms) 
+
+
+        for (const platform of platforms) // Loop through the platforms array and add each platform to the game
         {
-            this.add(platform);
+            this.add(platform); // Add the platform to the game
         }
+
+
         //portal set1
-        this.add(new Portal(55, 40, 50, 100,'rgba(255,0,0,0)', 1));
-        this.add(new Portal(1603, 40, 50, 100,'rgba(255,0,0,0)', 2));
+        this.add(new Portal(55, 40, 50, 100,'rgba(255,0,0,0)', 1)); // Add the portal to the game
+        this.add(new Portal(1603, 40, 50, 100,'rgba(255,0,0,0)', 2)); // Add the portal to the game
 
         //portal set2
-        this.add(new Portal(1285, 140, 100, 30,'rgba(255,0,0,0)', 3));
-        this.add(new Portal(580, 440, 120, 40,'rgba(255,0,0,0)', 4));
+        this.add(new Portal(1285, 140, 100, 30,'rgba(255,0,0,0)', 3)); // Add the portal to the game
+        this.add(new Portal(580, 440, 120, 40,'rgba(255,0,0,0)', 4)); // Add the portal to the game
 
         //portal set3
-        this.add(new Portal(1020, 650, 50, 100,'rgba(255,0,0,0)', 5));
-        this.add(new Portal(480, 40, 50, 100,'rgba(255,0,0,0)', 6));
+        this.add(new Portal(1020, 650, 50, 100,'rgba(255,0,0,0)', 5)); // Add the portal to the game
+        this.add(new Portal(480, 40, 50, 100,'rgba(255,0,0,0)', 6)); // Add the portal to the game
 
         //portal set4
-        this.add(new Portal(1175, 40, 50, 100,'rgba(255,0,0,0)', 7));
-        this.add(new Portal(750, 170, 50, 100,'rgba(255,0,0,0)',8));
+        this.add(new Portal(1175, 40, 50, 100,'rgba(255,0,0,0)', 7)); // Add the portal to the game
+        this.add(new Portal(750, 170, 50, 100,'rgba(255,0,0,0)',8)); // Add the portal to the game
 
         //portal set5
-        this.add(new Portal(1390, 650, 50, 100,'rgba(255,0,0,0)', 9));
-        this.add(new Portal(1490, 650, 50, 100,'rgba(255,0,0,0)', 10));
+        this.add(new Portal(1390, 650, 50, 100,'rgba(255,0,0,0)', 9)); // Add the portal to the game
+        this.add(new Portal(1490, 650, 50, 100,'rgba(255,0,0,0)', 10)); // Add the portal to the game
        
 
-        //spikes 
-        this.add(new Spikes(60, 585,Images.spike1));
+        //Add spikes to the game 
+        this.add(new Spikes(60, 585,Images.spike1)); 
         this.add(new Spikes(90, 585, Images.spike1));
         this.add(new Spikes(55, 175, Images.spike3));
         this.add(new Spikes(90, 175, Images.spike3));
@@ -114,12 +118,12 @@ class Level extends Game
         this.add(new Spikes(1625, 300, Images.spike4));
         this.add(new Spikes(1625, 330, Images.spike4));
         
-        //keys
+        //Add keys to the game
         this.add(new Key(115, 450));
         this.add(new Key(640, 220));
         this.add(new Key(1280, 350));
         
-        //gems
+        //Add gems to the game
         this.add(new Gem(430, 450));
         this.add(new Gem(285, 90));
         this.add(new Gem(660, 90));
@@ -127,11 +131,11 @@ class Level extends Game
         this.add(new Gem(960, 600));
         this.add(new Gem(1400, 90));
  
-        //win condition
+        //Add a win condition (the chest at the end)
         const winCon = new WinCon(1620, 700)
         this.add(winCon);
 
-        //tiles
+        //Add the tiles (over platforms that help with collision detection)
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
     }

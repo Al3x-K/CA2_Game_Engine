@@ -1,6 +1,6 @@
 const Images = 
 {
-    passiveIdle: new Image(), // The Image instance for the player.
+    player: new Image(), // The Image instance for the player.
     key: new Image(), // The Image instance for the key.
     gem: new Image(), // The Image instance for the gem.
     tiles: new Image(), // The Image instance for the tiles.
@@ -14,23 +14,26 @@ const Images =
   
 const AudioFiles = 
 {
-    jump: './resources/audio/jump.mp3', // The file path of the jump sound.
-    collect: './resources/audio/collect.mp3', // The file path of the collect sound.
-    // Add more audio file paths as needed
+    walkSound: new Audio(), // The Audio instance for the walk sound.
+    jump: new Audio(), // The Audio instance for the jump sound.
+    collect: new Audio(),  // The Audio instance for the collect sound.
+    
 };
   
   // Set the source of the player image.
-Images.passiveIdle.src = './resources/player/PassiveIdle.png';
-Images.key.src = './resources/tiled/key.png';
-Images.gem.src = './resources/tiled/gem.png';
-Images.tiles.src = './resources/tiled/tileset.png';
-Images.chest.src = './resources/tiled/winCon.png';
-Images.spike1.src = './resources/tiled/spikes.png';
-Images.spike2.src = './resources/tiled/spike2.png';
-Images.spike3.src = './resources/tiled/spike3.png';
-Images.spike4.src = './resources/tiled/spike4.png';
+  Images.player.src = './resources/player/pi1.png';
+  Images.key.src = './resources/tiled/key.png';
+  Images.gem.src = './resources/tiled/gem.png';
+  Images.tiles.src = './resources/tiled/tileset.png';
+  Images.chest.src = './resources/tiled/winCon.png';
+  Images.spike1.src = './resources/tiled/spikes.png';
+  Images.spike2.src = './resources/tiled/spike2.png';
+  Images.spike3.src = './resources/tiled/spike3.png';
+  Images.spike4.src = './resources/tiled/spike4.png';
 
-
+  AudioFiles.walkSound = './resources/audio/walkSound.mp3';
+  AudioFiles.jump = './resources/audio/jumpSound.mp3';
+  AudioFiles.collect = './resources/audio/collectSound.mp3';
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };
   

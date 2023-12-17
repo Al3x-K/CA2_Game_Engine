@@ -6,11 +6,12 @@ class Camera
   
     constructor(target, width, height) 
     {       
-        this.target = target;   
-        this.width = width;
-        this.height = height;
-        this.x = 0;  
-        this.y = 0;
+        this.target = target; // The target is the object that the camera will follow
+        // The width and height are the dimensions of the camera.
+        this.width = width; 
+        this.height = height; 
+        this.x = 0; // The x-coordinate of the camera  
+        this.y = 0; // The y-coordinate of the camera
     }
 
     // The update method adjusts the camera's position to center on the target object. It's called typically in the game's update loop.

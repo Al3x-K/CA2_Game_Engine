@@ -3,7 +3,7 @@ import GameObject from '../Engine/gameobject.js';
 import Input from '../Engine/input.js';
 import Physics from '../Engine/physics.js';
 import Renderer from '../Engine/renderer.js';
-import {Images} from '../Engine/resources.js';
+import {Images, AudioFiles} from '../Engine/resources.js';
 import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
@@ -11,14 +11,14 @@ import Portal from './portal.js';
 import ParticleSystem from '../Engine/particleSystem.js';
 import WinCon from './winCon.js';
 import Spikes from './spikes.js';
-import Animator from '../Engine/animator.js';
+
 
 class Player extends GameObject
 {  
     constructor(x,y)
     {
         super(x,y); // Call the super constructor
-        this.renderer = new Renderer('blue', 22, 34, Images.player); // Add a renderer component to the object
+        this.renderer = new Renderer('blue',30, 34, Images.player); // Add a renderer component to the object
         this.addComponent(this.renderer);
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add a physics component to the object
         this.addComponent(new Input()); // Add an input component to the object
@@ -30,28 +30,31 @@ class Player extends GameObject
         this.jumpTimer = 0; // Set the jump timer of the player
         this.score = 0; // Set the score of the player
         this.numOfKeys = 0; // Set the number of keys the player has collected
+        this.playerImage = Images.player; // Set the player image
     }
 
+    
 
     update(deltaTime)
     {
         const physics = this.getComponent(Physics); // Get the physics component of the player
         const input = this.getComponent(Input); // Get the input component of the player
         const keys = input.keys; // Get the keys of the player
+        let walk = new Audio(AudioFiles.walkSound); // Create a new audio instance
+        let jump = new Audio(AudioFiles.jumpSound); // Create a new audio instance
         
-        const animator = this.getComponent(Animator); // Get the animator component of the player
-        const Idle = []; // Create an array for the idle animation
-        Idle.push(animator)
         // Handle player movement
         if (input.isKeyDown('KeyD'))  // If the player is pressing the D key
         {
-            physics.velocity.x = 1.5; // Set the velocity of the player
+            physics.velocity.x = 1.2; // Set the velocity of the player
             this.direction = 1; // Set the direction of the player
+            walk.play(); // Play the audio
         } 
         else if (input.isKeyDown('KeyA'))  // If the player is pressing the A key
         {
-            physics.velocity.x = -1.5;  
+            physics.velocity.x = -1.2;  
             this.direction = -1;
+            walk.play(); // Play the audio
         } 
         else // If the player is not pressing any keys
         { 
@@ -62,6 +65,7 @@ class Player extends GameObject
         if (input.isKeyDown('KeyW') && this.isOnPlatform) // If the player is pressing the W key and is on a platform
         {
             this.startJump();   // Start the jump
+            jump.play(); // Play the audio
         }
       
         if (this.isJumping) // If the player is jumping
@@ -105,6 +109,7 @@ class Player extends GameObject
         }   
 
         // Handle collisions with portals
+        //When player enters one portal, they are transported to differrent coordinates based on the id of the portal that they entered
         const portals = this.game.gameObjects.filter((obj) => obj instanceof Portal); // Get all the portals in the game
         for (const portal of portals) // Loop through all the portals
         {
@@ -163,12 +168,15 @@ class Player extends GameObject
 
         // Handle collisions with keys
         const collectibleKey = this.game.gameObjects.filter((obj) => obj instanceof Key); // Get all the keys in the game
+        let collectSound = new Audio(AudioFiles.collectSound); // Create a new audio instance
         for (const key of collectibleKey)   // Loop through all the keys
         {
+            
             if (physics.collision(key.getComponent(Physics)))   // If the player is colliding with a key
             {
                 this.collect(key);  // Collect the key
                 this.game.destroy(key); // Destroy the key
+                collectSound.play(); // Play the audio
             }
         }
 
@@ -180,6 +188,7 @@ class Player extends GameObject
             { 
                 this.collect(gem); // Collect the gem
                 this.game.destroy(gem); // Destroy the gem
+                collectSound.play(); // Play the audio
             }
         }
         
@@ -215,7 +224,7 @@ class Player extends GameObject
         { 
             this.isJumping = true;  // Set the player to be jumping
             this.jumpTimer = this.jumpTime; // Set the jump timer
-            this.getComponent(Physics).velocity.y = -this.jumpForce;    // Set the velocity of the player
+            this.getComponent(Physics).velocity.y = -this.jumpForce; // Set the velocity of the player
             this.y += this.getComponent(Physics).gravity.y; // Set the gravity of the player
             this.isOnPlatform = false;  // Set the player to not be on a platform
         }
@@ -225,25 +234,23 @@ class Player extends GameObject
     {
         // Updates the jump progress over time
         this.jumpTimer -= deltaTime;
-        if (this.jumpTimer <= 0 || this.getComponent(Physics).velocity.y > 0) 
+        if (this.jumpTimer <= 0 || this.getComponent(Physics).velocity.y > 0)  // If the jump timer is less than or equal to 0 or the velocity of the player is greater than 0
         {
-            this.isJumping = false;
+            this.isJumping = false; // Set the player to not be jumping
         }
     }
 
-    collect(collectible)    // Collect a collectible
+    collect(collectible) // Collect a collectible
     {
         if (collectible instanceof Gem) // If the collectible is a gem
         {
             this.score += 1; // Increment the score
-            this.emitCollectParticlesGems(collectible); // Emit particles
-            console.log('score' + this.score); 
+            this.emitCollectParticlesGems(collectible); // Emit particles 
         } 
         else if (collectible instanceof Key) // If the collectible is a key
         {
             this.numOfKeys += 1; // Increment the number of keys
             this.emitCollectParticlesKeys(collectible); // Emit particles
-            console.log('keys' + this.numOfKeys);
         }
         
     }

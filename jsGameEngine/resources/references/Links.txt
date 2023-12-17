@@ -1,4 +1,25 @@
-Tutorials:
+Tutorials: (used as an inspiration or as a source to better uderstand the topic)
+
+-> "2D breakout game using pure JavaScript" athttps://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript
 
 Tiled:
 -> "Tiled Map Editor Tutorial series" by "ewat" at https://www.youtube.com/playlist?list=PLu4oc9P-ABcOXNOyoAvnMyUwn_kkiVA5B;
+
+Audio:
+-> "How to play Audio Files with JavaScript" by "The Wheelchair Guy" at https://youtu.be/3xlws5og44U?si=LyIOv5oOpGLRGhnb
+
+Menu:
+-> "Add a start and game over screen to JavaScript Pong" (as the inspiration) by "David Reid" at https://youtu.be/8_zUEh7Vqhs?si=80y2pQUrTgyGH7XL
+
+Sprites and tiles:
+-> "Reaper (Animated Pixel Art)" by "SamuelLee" at https://samuellee.itch.io/reaper-animated-pixel-art
+-> Tileset by "Champi_S" at https://champi-s.itch.io/dungeon-pixel-art-x32
+-> "Spikes" by 	"Omniclause" at https://omniclause.itch.io/spikes
+
+Collisions:
+-> "Collision Detection Between Rectangles in JavaScript" by "Franks laboratory" at https://youtu.be/r0sy-Cr6WHY?si=tkQhBclLRGCFXp4l
+-> "Collision Detection Between Circles in JavaScript" by "Franks laboratory" at https://youtu.be/rtBCVe3j_24?si=O4yShGB6OHImEyXw
+ 
+Other:
+-> "JavaScript Game Tutorial - Particles & Interactions" by "Franks laboratory" https://youtu.be/6ppfyWdoH3c?si=-Vkup4dTo1ZtbaWe
+
