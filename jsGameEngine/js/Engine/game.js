@@ -24,7 +24,7 @@ class Game
 
     start()
     {
-        btn1.addEventListener('click', () => this.startGame());
+        window.addEventListener('click', () => this.startGame());
         this.isRunning = true;
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
@@ -38,6 +38,28 @@ class Game
         gameCanvas.style.display = 'block';
         endDiv.style.display = 'none';
         this.start();
+    }
+
+    levelCompleted()
+    {
+        let startDiv = document.getElementById('start');
+        let gameCanvas = this.canvas;
+        let endDiv = document.getElementById('levelCompleted');
+        startDiv.style.display = 'none';
+        gameCanvas.style.display = 'none';
+        endDiv.style.display = 'block';
+        this.isRunning = false;
+    }
+    
+    gameOver()
+    {
+        let startDiv = document.getElementById('start');
+        let gameCanvas = this.canvas;
+        let endDiv = document.getElementById('gameOver');
+        startDiv.style.display = 'none';
+        gameCanvas.style.display = 'none';
+        endDiv.style.display = 'block';
+        this.isRunning = false;
     }
 
     gameLoop(currentTime)

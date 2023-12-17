@@ -9,6 +9,7 @@ import Gem from './gem.js';
 import CollisionBlock from './collisionBlock.js';
 import ParticleSystem from '../Engine/particleSystem.js';
 import WinCon from './winCon.js';
+import Spikes from './spikes.js';
 
 class Player extends GameObject
 {  
@@ -22,7 +23,7 @@ class Player extends GameObject
         this.direction = 1;
         this.isOnPlatform = false;
         this.isJumping = false;
-        this.jumpForce = 5;
+        this.jumpForce = 3;
         this.jumpTime = 0.1;
         this.jumpTimer = 0;
         this.score = 0;
@@ -38,12 +39,12 @@ class Player extends GameObject
         // Handle player movement
         if (input.isKeyDown('KeyD')) 
         {
-            physics.velocity.x = 2.5;
+            physics.velocity.x = 1.5;
             this.direction = 1;
         } 
         else if (input.isKeyDown('KeyA')) 
         {
-            physics.velocity.x = -2.5;
+            physics.velocity.x = -1.5;
             this.direction = -1;
         } 
         else
@@ -129,7 +130,7 @@ class Player extends GameObject
                 }
                 else if (portal.id == 6 && this.score >= 4) //portal 6
                 {
-                    this.x = 1000;
+                    this.x = 980;
                     this.y = 680;
                 }
                 else if (portal.id == 7 && this.score >= 4) //portal 7
@@ -168,6 +169,15 @@ class Player extends GameObject
             {
                 this.collect(gem);
                 this.game.destroy(gem);
+            }
+        }
+        
+        const spikes = this.game.gameObjects.filter((obj) => obj instanceof Spikes);
+        for (const spike of spikes)
+        {
+            if (physics.collision(spike.getComponent(Physics)))
+            {
+                this.game.gameOver();
             }
         }
         this.winGame();
