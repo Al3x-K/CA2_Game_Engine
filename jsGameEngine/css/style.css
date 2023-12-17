@@ -1,4 +1,4 @@
-body
+body 
 {
     margin: 0;
     display: flex;
@@ -8,11 +8,56 @@ body
     background-color: black;
 }
 
-canvas
+canvas 
 {
     margin: 0;
     border: 1px solid #fff; /* 1 pixel solid white border */
     background-color: white;
     width: 1024px;
     height: 576px;
+}
+
+#start
+{
+    margin: 0;
+    border: 1px solid #fff; /* 1 pixel solid white border */
+    background-image: url("../resources/background/menu1.png");
+    width: 1024px;
+    height: 576px;
+}
+
+#levelCompleted
+{
+    margin: 0;
+    border: 1px solid #fff; /* 1 pixel solid white border */
+    background-color: white;
+    width: 1024px;
+    height: 576px;
+}
+
+.container 
+{
+    position: absolute;
+    width: 1024px;
+} 
+
+.container .btn 
+{
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 25px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+.container .btn:hover 
+{
+    background-color: black;
 }

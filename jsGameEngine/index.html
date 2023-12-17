@@ -7,7 +7,13 @@
     <title>2D Game Engine</title>
 </head>
 <body>
-   <canvas id="gameCanvas"></canvas>
+   <canvas id="gameCanvas" style = "display: none"></canvas> <!-- Canvas element for the game -->
+   <div id = "start" style = "display:block"> 
+        <div class="container"> <!-- Container for the Start Game button -->
+            <button id = "btn1" class="btn" onclick = "start()">Start Game</button> <!-- Start Game button -->
+        </div>
+    </div>
+   <div id = "levelCompleted" style = "display:none"></div> <!-- Container for the Level Completed message -->
    <script type="module" src="js/start.js"></script> 
 </body>
 </html>

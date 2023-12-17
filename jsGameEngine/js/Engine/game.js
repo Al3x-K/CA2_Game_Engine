@@ -13,6 +13,7 @@ class Game
         this.resizeCanvas();
         window.addEventListener('resize', () => this.resizeCanvas());
         this.camera = new Camera(null,this.canvas.width,this.canvas.height);
+        this.startButton = document.getElementById('btn1');
     }
 
     resizeCanvas()
@@ -23,8 +24,20 @@ class Game
 
     start()
     {
+        btn1.addEventListener('click', () => this.startGame());
         this.isRunning = true;
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+    }
+
+    startGame()
+    {
+        let startDiv = document.getElementById('start');
+        let gameCanvas = this.canvas;
+        let endDiv = document.getElementById('levelCompleted');
+        startDiv.style.display = 'none';
+        gameCanvas.style.display = 'block';
+        endDiv.style.display = 'none';
+        this.start();
     }
 
     gameLoop(currentTime)

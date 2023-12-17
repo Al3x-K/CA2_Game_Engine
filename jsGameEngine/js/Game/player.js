@@ -226,17 +226,17 @@ class Player extends GameObject
         this.game.add(particleSystem); // Add the particle system to the game
     }
 
-    winGame()
+    winGame() // Win the game when the player collects all the keys and hits the chest
     {
         const physics = this.getComponent(Physics);
-        const winCon = this.game.gameObjects.filter((obj) => obj instanceof WinCon);
-        for (const win of winCon)
+        const winCon = this.game.gameObjects.filter((obj) => obj instanceof WinCon); // Get the winCon object
+        for (const win of winCon) 
         {
-            if (physics.collision(win.getComponent(Physics)))
+            if (physics.collision(win.getComponent(Physics))) // If the player collides with the winCon object
             {
-                if (this.numOfKeys = 3)
+                if (this.numOfKeys = 3) // If the player has collected all the keys
                 {
-                    console.log("You Win!");
+                    console.log("Level Completed!"); // Log that the level is completed
                 }
             }
         }
