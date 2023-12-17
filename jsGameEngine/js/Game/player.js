@@ -1,3 +1,4 @@
+//imports:
 import GameObject from '../Engine/gameobject.js';
 import Input from '../Engine/input.js';
 import Physics from '../Engine/physics.js';
@@ -6,7 +7,7 @@ import {Images} from '../Engine/resources.js';
 import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
-import CollisionBlock from './collisionBlock.js';
+import Portal from './portal.js';
 import ParticleSystem from '../Engine/particleSystem.js';
 import WinCon from './winCon.js';
 import Spikes from './spikes.js';
@@ -15,63 +16,63 @@ class Player extends GameObject
 {  
     constructor(x,y)
     {
-        super(x,y);
-        this.renderer = new Renderer('blue', 22, 34, Images.player);
+        super(x,y); // Call the super constructor
+        this.renderer = new Renderer('blue', 22, 34, Images.player); // Add a renderer component to the object
         this.addComponent(this.renderer);
-        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }));
-        this.addComponent(new Input());
-        this.direction = 1;
-        this.isOnPlatform = false;
-        this.isJumping = false;
-        this.jumpForce = 3.2;
-        this.jumpTime = 0.1;
-        this.jumpTimer = 0;
-        this.score = 0;
-        this.numOfKeys = 0;
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add a physics component to the object
+        this.addComponent(new Input()); // Add an input component to the object
+        this.direction = 1; // Set the direction of the player
+        this.isOnPlatform = false; // Set the player to not be on a platform
+        this.isJumping = false; // Set the player to not be jumping
+        this.jumpForce = 3.2; // Set the jump force of the player
+        this.jumpTime = 0.1; // Set the jump time of the player
+        this.jumpTimer = 0; // Set the jump timer of the player
+        this.score = 0; // Set the score of the player
+        this.numOfKeys = 0; // Set the number of keys the player has collected
     }
 
 
     update(deltaTime)
     {
-        const physics = this.getComponent(Physics);
-        const input = this.getComponent(Input);
-        const keys = input.keys;
+        const physics = this.getComponent(Physics); // Get the physics component of the player
+        const input = this.getComponent(Input); // Get the input component of the player
+        const keys = input.keys; // Get the keys of the player
+        
         // Handle player movement
-        if (input.isKeyDown('KeyD')) 
+        if (input.isKeyDown('KeyD'))  // If the player is pressing the D key
         {
-            physics.velocity.x = 1.5;
-            this.direction = 1;
+            physics.velocity.x = 1.5; // Set the velocity of the player
+            this.direction = 1; // Set the direction of the player
         } 
-        else if (input.isKeyDown('KeyA')) 
+        else if (input.isKeyDown('KeyA'))  // If the player is pressing the A key
         {
-            physics.velocity.x = -1.5;
+            physics.velocity.x = -1.5;  
             this.direction = -1;
         } 
-        else
-        {
-            physics.velocity.x = 0;
-        }
+        else // If the player is not pressing any keys
+        { 
+            physics.velocity.x = 0; // Set the velocity of the player to 0
+        } 
 
-        if (input.isKeyDown('KeyW') && this.isOnPlatform)
+        if (input.isKeyDown('KeyW') && this.isOnPlatform) // If the player is pressing the W key and is on a platform
         {
-            this.startJump();
+            this.startJump();   // Start the jump
         }
       
-        if (this.isJumping) 
+        if (this.isJumping) // If the player is jumping
         {
-            this.updateJump(deltaTime);
+            this.updateJump(deltaTime); // Update the jump
         }
 
+        // Handle collisions with platforms
         this.isOnPlatform = false;  // Reset this before checking collisions with platforms
-        const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
-        for (const platform of platforms) 
+        const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform); // Get all the platforms in the game
+        for (const platform of platforms)  // Loop through all the platforms
         {
-            if (physics.collision(platform.getComponent(Physics))) 
+            if (physics.collision(platform.getComponent(Physics)))  // If the player is colliding with a platform
             {
-                if (!this.isJumping) 
+                if (!this.isJumping)  // If the player is not jumping
                 {
-                    
-                    //physics.velocity.x = 0;  
                     if(this.y > platform.y + platform.getComponent(Renderer).height - 30) //30 is the threshold for the player to be on the platform    
                     {
                         this.y = platform.y + platform.getComponent(Renderer).height; 
@@ -98,12 +99,14 @@ class Player extends GameObject
             }
         }   
 
-        const portals = this.game.gameObjects.filter((obj) => obj instanceof CollisionBlock);
-        for (const portal of portals)
+        // Handle collisions with portals
+        const portals = this.game.gameObjects.filter((obj) => obj instanceof Portal); // Get all the portals in the game
+        for (const portal of portals) // Loop through all the portals
         {
-            if (physics.collision(portal.getComponent(Physics)))
+            if (physics.collision(portal.getComponent(Physics))) // If the player is colliding with a portal
             {
-                if(portal.id == 1 && this.score >= 1) //portal 1
+                //the entrace to the portals is granted based on the currenct amount of gems the player has collected
+                if(portal.id == 1 && this.score >= 1) //portal 1 
                 {
                     this.x = 1550; 
                     this.y = 100;
@@ -152,34 +155,40 @@ class Player extends GameObject
                
             }
         }
-        const collectibleKey = this.game.gameObjects.filter((obj) => obj instanceof Key);
-        for (const key of collectibleKey) 
+
+        // Handle collisions with keys
+        const collectibleKey = this.game.gameObjects.filter((obj) => obj instanceof Key); // Get all the keys in the game
+        for (const key of collectibleKey)   // Loop through all the keys
         {
-            if (physics.collision(key.getComponent(Physics))) 
+            if (physics.collision(key.getComponent(Physics)))   // If the player is colliding with a key
             {
-                this.collect(key);
-                this.game.destroy(key);
+                this.collect(key);  // Collect the key
+                this.game.destroy(key); // Destroy the key
             }
         }
 
-        const collectibleGems = this.game.gameObjects.filter((obj) => obj instanceof Gem);
-        for (const gem of collectibleGems) 
+        // Handle collisions with gems
+        const collectibleGems = this.game.gameObjects.filter((obj) => obj instanceof Gem); // Get all the gems in the game
+        for (const gem of collectibleGems)  // Loop through all the gems
         {
-            if (physics.collision(gem.getComponent(Physics))) 
-            {
-                this.collect(gem);
-                this.game.destroy(gem);
+            if (physics.collision(gem.getComponent(Physics)))   // If the player is colliding with a gem
+            { 
+                this.collect(gem); // Collect the gem
+                this.game.destroy(gem); // Destroy the gem
             }
         }
         
-        const spikes = this.game.gameObjects.filter((obj) => obj instanceof Spikes);
-        for (const spike of spikes)
+        // Handle collisions with spikes
+        const spikes = this.game.gameObjects.filter((obj) => obj instanceof Spikes);    // Get all the spikes in the game
+        for (const spike of spikes) // Loop through all the spikes
         {
-            if (physics.collision(spike.getComponent(Physics)))
+            if (physics.collision(spike.getComponent(Physics))) // If the player is colliding with a spike
             {
-                this.game.gameOver();
+                this.game.gameOver();   // Game over
             }
         }
+
+        // Handle collisions with winCon
         const winCon = this.game.gameObjects.filter((obj) => obj instanceof WinCon); // Get the winCon object
         for (const win of winCon) 
         {
@@ -187,23 +196,22 @@ class Player extends GameObject
             {
                 if (this.numOfKeys = 3) // If the player has collected all the keys
                 {
-                    this.game.levelCompleted() 
-                }
+                    this.game.levelCompleted()  // Level completed
+                }   
             }
         }
-        super.update(deltaTime);
+        super.update(deltaTime);    // Call the super update method
     }
 
     startJump() 
     {
-        // Initiate a jump if the player is on a platform
-        if (this.isOnPlatform) 
+        if (this.isOnPlatform)  // If the player is on a platform
         { 
-            this.isJumping = true;
-            this.jumpTimer = this.jumpTime;
-            this.getComponent(Physics).velocity.y = -this.jumpForce;
-            this.y += this.getComponent(Physics).gravity.y;
-            this.isOnPlatform = false;
+            this.isJumping = true;  // Set the player to be jumping
+            this.jumpTimer = this.jumpTime; // Set the jump timer
+            this.getComponent(Physics).velocity.y = -this.jumpForce;    // Set the velocity of the player
+            this.y += this.getComponent(Physics).gravity.y; // Set the gravity of the player
+            this.isOnPlatform = false;  // Set the player to not be on a platform
         }
     }
       
@@ -217,7 +225,7 @@ class Player extends GameObject
         }
     }
 
-    collect(collectible) 
+    collect(collectible)    // Collect a collectible
     {
         if (collectible instanceof Gem) // If the collectible is a gem
         {
@@ -244,6 +252,12 @@ class Player extends GameObject
     {
         const particleSystem = new ParticleSystem(this.x,this.y,'yellow',20,1,1); // Create a new particle system
         this.game.add(particleSystem); // Add the particle system to the game
+    }
+
+    resetPleyerState()  // Reset the player state
+    {
+        this.score = 0; // Reset the score
+        this.numOfKeys = 0; // Reset the number of keys
     }
 
 }

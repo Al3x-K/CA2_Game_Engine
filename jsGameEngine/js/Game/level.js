@@ -4,11 +4,11 @@ import Sprite from '../Engine/sprite.js';
 import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
-import CollisionBlock from './collisionBlock.js';
+import Portal from './portal.js';
 import WinCon from './winCon.js';
 import Spikes from './spikes.js';
 import { Images } from '../Engine/resources.js';
-import PlayerUI from './playerUI.js';
+
 
 class Level extends Game
 {
@@ -64,24 +64,24 @@ class Level extends Game
             this.add(platform);
         }
         //portal set1
-        this.add(new CollisionBlock(55, 40, 50, 100,'rgba(255,0,0,0)', 1));
-        this.add(new CollisionBlock(1603, 40, 50, 100,'rgba(255,0,0,0)', 2));
+        this.add(new Portal(55, 40, 50, 100,'rgba(255,0,0,0)', 1));
+        this.add(new Portal(1603, 40, 50, 100,'rgba(255,0,0,0)', 2));
 
         //portal set2
-        this.add(new CollisionBlock(1285, 140, 100, 30,'rgba(255,0,0,0)', 3));
-        this.add(new CollisionBlock(580, 440, 120, 40,'rgba(255,0,0,0)', 4));
+        this.add(new Portal(1285, 140, 100, 30,'rgba(255,0,0,0)', 3));
+        this.add(new Portal(580, 440, 120, 40,'rgba(255,0,0,0)', 4));
 
         //portal set3
-        this.add(new CollisionBlock(1020, 650, 50, 100,'rgba(255,0,0,0)', 5));
-        this.add(new CollisionBlock(480, 40, 50, 100,'rgba(255,0,0,0)', 6));
+        this.add(new Portal(1020, 650, 50, 100,'rgba(255,0,0,0)', 5));
+        this.add(new Portal(480, 40, 50, 100,'rgba(255,0,0,0)', 6));
 
         //portal set4
-        this.add(new CollisionBlock(1175, 40, 50, 100,'rgba(255,0,0,0)', 7));
-        this.add(new CollisionBlock(750, 170, 50, 100,'rgba(255,0,0,0)',8));
+        this.add(new Portal(1175, 40, 50, 100,'rgba(255,0,0,0)', 7));
+        this.add(new Portal(750, 170, 50, 100,'rgba(255,0,0,0)',8));
 
         //portal set5
-        this.add(new CollisionBlock(1390, 650, 50, 100,'rgba(255,0,0,0)', 9));
-        this.add(new CollisionBlock(1490, 650, 50, 100,'rgba(255,0,0,0)', 10));
+        this.add(new Portal(1390, 650, 50, 100,'rgba(255,0,0,0)', 9));
+        this.add(new Portal(1490, 650, 50, 100,'rgba(255,0,0,0)', 10));
        
 
         //spikes 
@@ -136,7 +136,7 @@ class Level extends Game
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
 
-        this.add(new PlayerUI(100, 100));
+        
         
     }
     

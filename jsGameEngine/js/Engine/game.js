@@ -24,28 +24,28 @@ class Game
 
     start()
     {
-        window.addEventListener('click', () => this.startGame());
-        this.isRunning = true;
-        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        window.addEventListener('click', () => this.startGame());   // Start the game when the user clicks the button
+        this.isRunning = true;  // Set isRunning to true
+        requestAnimationFrame((timestamp) => this.gameLoop(timestamp)); // Start the game loop
     }
 
     startGame()
     {
-        let startDiv = document.getElementById('start');
-        let gameCanvas = this.canvas;
-        let endDiv = document.getElementById('levelCompleted');
-        startDiv.style.display = 'none';
-        gameCanvas.style.display = 'block';
-        endDiv.style.display = 'none';
-        this.start();
+        let startDiv = document.getElementById('start');    // Get the start div
+        let gameCanvas = this.canvas;   // Get the canvas
+        let endDiv = document.getElementById('levelCompleted'); // Get the end div
+        startDiv.style.display = 'none';    // Hide the start div
+        gameCanvas.style.display = 'block'; // Show the canvas
+        endDiv.style.display = 'none';  // Hide the end div
+        this.start();   // Start the game
     }
 
     levelCompleted()
     {
-        let startDiv = document.getElementById('start');
+        let startDiv = document.getElementById('start');    
         let gameCanvas = this.canvas;
         let endDiv = document.getElementById('levelCompleted');
-        startDiv.style.display = 'none';
+        startDiv.style.display = 'none';    
         gameCanvas.style.display = 'none';
         endDiv.style.display = 'block';
         this.isRunning = false;
@@ -64,7 +64,7 @@ class Game
 
     gameLoop(currentTime)
     {
-        if(!this.isRunning)
+        if(!this.isRunning) // If the game is not running, don't update or draw anything
         {
             return;
         }
@@ -96,7 +96,7 @@ class Game
         this.ctx.restore();
     }
 
-    add(gameObject)
+    add(gameObject) 
     {
         gameObject.game = this;
         this.gameObjects.push(gameObject);

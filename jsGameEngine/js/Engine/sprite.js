@@ -7,20 +7,20 @@ class Sprite extends GameObject
     constructor({position, imageSrc},width,height)
     {
         super();
-        this.position = position;
-        this.image = new Image();
-        this.image.src = imageSrc;
-        this.width = width;
-        this.height = height;
+        this.position = position; // The position of the sprite
+        this.image = new Image(); // Create a new image object
+        this.image.src = imageSrc; // Set the source of the image
+        this.width = width; // The width of the sprite
+        this.height = height; // The height of the sprite
     }
 
     draw(ctx)
     {
-        if(!this.image)
+        if(!this.image) // If the image is not loaded yet, don't try to draw it
         {
             return;
         }
-        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height); // Draw the image
     }
 
     update()

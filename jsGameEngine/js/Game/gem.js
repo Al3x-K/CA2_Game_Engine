@@ -7,11 +7,11 @@ class Gem extends GameObject
 {
     constructor(x,y)
     {
-        super(x,y);
-        this.renderer = new Renderer('yellow', 20, 15, Images.gem);
-        this.addComponent(this.renderer);
-        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 },{ x: 0, y: 0 }));
-        this.tag = 'collectible';
+        super(x,y); // Call the super constructor
+        this.renderer = new Renderer('yellow', 20, 15, Images.gem); // Add a renderer component to the object
+        this.addComponent(this.renderer); // Add a renderer component to the object
+        this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 },{ x: 0, y: 0 })); // Add a physics component to the object
+        this.tag = 'collectible'; // Set the tag of the object
     }
 }
 
