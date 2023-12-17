@@ -9,7 +9,6 @@ import WinCon from './winCon.js';
 import Spikes from './spikes.js';
 import { Images } from '../Engine/resources.js';
 
-
 class Level extends Game
 {
     constructor(canvasId)
@@ -135,9 +134,6 @@ class Level extends Game
         //tiles
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
-
-        
-        
     }
     
 }

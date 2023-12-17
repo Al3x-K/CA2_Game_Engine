@@ -200,6 +200,7 @@ class Player extends GameObject
                 }   
             }
         }
+
         super.update(deltaTime);    // Call the super update method
     }
 
