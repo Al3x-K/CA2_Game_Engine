@@ -2,7 +2,7 @@ import Component from "./component.js";
 
 class UI extends Component
 {
-    constructor(text,x,y,font,color,textAlign,text)    
+    constructor(text,x,y,font,color,textAlign,textBaseline)    
     {
         super();
         this.text = text;

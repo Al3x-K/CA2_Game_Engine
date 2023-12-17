@@ -50,7 +50,7 @@ class Game
         endDiv.style.display = 'block';
         this.isRunning = false;
     }
-    
+
     gameOver()
     {
         let startDiv = document.getElementById('start');

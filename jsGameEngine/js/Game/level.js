@@ -8,6 +8,7 @@ import CollisionBlock from './collisionBlock.js';
 import WinCon from './winCon.js';
 import Spikes from './spikes.js';
 import { Images } from '../Engine/resources.js';
+import PlayerUI from './playerUI.js';
 
 class Level extends Game
 {
@@ -19,6 +20,7 @@ class Level extends Game
         const player = new Player(70, 680);
         this.add(player);
         this.camera.target = player;
+        
 
         const platforms = 
         [
@@ -83,14 +85,12 @@ class Level extends Game
        
 
         //spikes 
-        this.add(new Spikes(110, 585,Images.spike1));
-        this.add(new Spikes(80, 585, Images.spike1));
+        this.add(new Spikes(60, 585,Images.spike1));
+        this.add(new Spikes(90, 585, Images.spike1));
         this.add(new Spikes(55, 175, Images.spike3));
         this.add(new Spikes(90, 175, Images.spike3));
-        this.add(new Spikes(125, 175, Images.spike3));
         this.add(new Spikes(330, 395, Images.spike3));
         this.add(new Spikes(320, 140, Images.spike2));
-        this.add(new Spikes(800, 570, Images.spike3));
         this.add(new Spikes(830, 570, Images.spike3));
         this.add(new Spikes(860, 570, Images.spike3));
         this.add(new Spikes(890, 570, Images.spike3));
@@ -103,7 +103,6 @@ class Level extends Game
         this.add(new Spikes(1240, 365,Images.spike1));
         this.add(new Spikes(1200, 440, Images.spike4));
         this.add(new Spikes(1200, 470, Images.spike4));
-        this.add(new Spikes(1200, 500, Images.spike4));
         this.add(new Spikes(1280, 440, Images.spike2));
         this.add(new Spikes(1280, 470, Images.spike2));
         this.add(new Spikes(1280, 500, Images.spike2));
@@ -115,20 +114,19 @@ class Level extends Game
         this.add(new Spikes(1625, 240, Images.spike4));
         this.add(new Spikes(1625, 300, Images.spike4));
         this.add(new Spikes(1625, 330, Images.spike4));
-        this.add(new Spikes(1625, 360, Images.spike4));
         
         //keys
         this.add(new Key(115, 450));
-        this.add(new Key(645, 230));
-        this.add(new Key(1290, 360));
+        this.add(new Key(640, 220));
+        this.add(new Key(1280, 350));
         
         //gems
-        this.add(new Gem(445, 470));
-        this.add(new Gem(285, 115));
-        this.add(new Gem(660, 117));
+        this.add(new Gem(430, 450));
+        this.add(new Gem(285, 90));
+        this.add(new Gem(660, 90));
         this.add(new Gem(930, 380));
-        this.add(new Gem(980, 600));
-        this.add(new Gem(1400, 120));
+        this.add(new Gem(960, 600));
+        this.add(new Gem(1400, 90));
  
         //win condition
         const winCon = new WinCon(1620, 700)
@@ -137,6 +135,8 @@ class Level extends Game
         //tiles
         const tiles = new Sprite({position: {x: 0, y: 0}, imageSrc: './resources/tiled/tileset.png'},this.canvas.width,this.canvas.height);
         this.add(tiles);
+
+        this.add(new PlayerUI(100, 100));
         
     }
     
