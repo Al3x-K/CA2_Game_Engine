@@ -5,6 +5,7 @@ import Platform from './platforms.js';
 import Key from './key.js';
 import Gem from './gem.js';
 import CollisionBlock from './collisionBlock.js';
+import WinCon from './winCon.js';
 
 class Level extends Game
 {
@@ -93,7 +94,7 @@ class Level extends Game
         this.add(new Gem(980, 600));
         this.add(new Gem(1400, 120));
 
-        const winCon = new Sprite({position: {x: 1630, y: 710}, imageSrc: './resources/tiled/winCon.png'},40,40);
+        const winCon = new WinCon(1620, 700)
         this.add(winCon);
 
         

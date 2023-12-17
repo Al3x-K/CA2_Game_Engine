@@ -8,6 +8,7 @@ import Key from './key.js';
 import Gem from './gem.js';
 import CollisionBlock from './collisionBlock.js';
 import ParticleSystem from '../Engine/particleSystem.js';
+import WinCon from './winCon.js';
 
 class Player extends GameObject
 {  
@@ -169,6 +170,7 @@ class Player extends GameObject
                 this.game.destroy(gem);
             }
         }
+        this.winGame();
         super.update(deltaTime);
     }
 
@@ -223,6 +225,23 @@ class Player extends GameObject
         const particleSystem = new ParticleSystem(this.x,this.y,'yellow',20,1,1); // Create a new particle system
         this.game.add(particleSystem); // Add the particle system to the game
     }
+
+    winGame()
+    {
+        const physics = this.getComponent(Physics);
+        const winCon = this.game.gameObjects.filter((obj) => obj instanceof WinCon);
+        for (const win of winCon)
+        {
+            if (physics.collision(win.getComponent(Physics)))
+            {
+                if (this.numOfKeys = 3)
+                {
+                    console.log("You Win!");
+                }
+            }
+        }
+    }
+
 }
 
 export default Player;
