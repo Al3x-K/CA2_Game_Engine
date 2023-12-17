@@ -1,6 +1,6 @@
 const Images = 
 {
-    player: new Image(), // The Image instance for the player.
+    passiveIdle: new Image(), // The Image instance for the player.
     key: new Image(), // The Image instance for the key.
     gem: new Image(), // The Image instance for the gem.
     tiles: new Image(), // The Image instance for the tiles.
@@ -20,7 +20,7 @@ const AudioFiles =
 };
   
   // Set the source of the player image.
-Images.player.src = './resources/player/passiveIdle/pi1.png';
+Images.passiveIdle.src = './resources/player/PassiveIdle.png';
 Images.key.src = './resources/tiled/key.png';
 Images.gem.src = './resources/tiled/gem.png';
 Images.tiles.src = './resources/tiled/tileset.png';

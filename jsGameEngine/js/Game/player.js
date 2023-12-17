@@ -11,6 +11,7 @@ import Portal from './portal.js';
 import ParticleSystem from '../Engine/particleSystem.js';
 import WinCon from './winCon.js';
 import Spikes from './spikes.js';
+import Animator from '../Engine/animator.js';
 
 class Player extends GameObject
 {  
@@ -38,6 +39,9 @@ class Player extends GameObject
         const input = this.getComponent(Input); // Get the input component of the player
         const keys = input.keys; // Get the keys of the player
         
+        const animator = this.getComponent(Animator); // Get the animator component of the player
+        const Idle = []; // Create an array for the idle animation
+        Idle.push(animator)
         // Handle player movement
         if (input.isKeyDown('KeyD'))  // If the player is pressing the D key
         {
@@ -52,6 +56,7 @@ class Player extends GameObject
         else // If the player is not pressing any keys
         { 
             physics.velocity.x = 0; // Set the velocity of the player to 0
+
         } 
 
         if (input.isKeyDown('KeyW') && this.isOnPlatform) // If the player is pressing the W key and is on a platform
@@ -260,7 +265,6 @@ class Player extends GameObject
         this.score = 0; // Reset the score
         this.numOfKeys = 0; // Reset the number of keys
     }
-
 }
 
 export default Player;

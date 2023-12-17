@@ -62,6 +62,8 @@ class Game
         this.isRunning = false;
     }
 
+    
+
     gameLoop(currentTime)
     {
         if(!this.isRunning) // If the game is not running, don't update or draw anything
